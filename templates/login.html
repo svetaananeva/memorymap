@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="mb-4 text-center">Вход</h2>
+
+                <form>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Электронная почта</label>
+                        <input type="email" class="form-control" id="email" placeholder="Введите email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="password" placeholder="Введите пароль">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Войти</button>
+                </form>
+
+                <p class="text-muted text-center mt-3 mb-0">
+                    На следующих этапах здесь будет подключена авторизация через Google OAuth.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

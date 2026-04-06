@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-9 col-lg-8">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="mb-4">Добавить воспоминание</h2>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Название места</label>
+                        {{ form.title }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Описание</label>
+                        {{ form.description }}
+                    </div>
+
+                    <!-- Блок карты -->
+                    <div class="mb-4">
+                        <label class="form-label">Точка на карте</label>
+
+                        <div class="border rounded-4 position-relative overflow-hidden bg-light"
+                             style="height: 320px; background-image:
+                             linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                             linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+                             background-size: 40px 40px;">
+
+                            <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                <div style="font-size: 52px;">📍</div>
+                                <div class="fw-semibold">Точка будет выбрана на карте</div>
+                                <div class="text-muted small">
+                                    Здесь будет подключена интерактивная карта
+для выбора точки и автоматического заполнения координат.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Координаты -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Широта</label>
+                            {{ form.latitude }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Долгота</label>
+                            {{ form.longitude }}
+                        </div>
+                        <div class="alert alert-secondary mt-2" role="alert">
+                             Пока координаты вводятся вручную. Автоматический выбор точки на карте
+будет реализован на следующем этапе разработки.
+
+                                </div>
+                    </div>
+
+                    <!-- Фото -->
+                    <div class="mb-4">
+                        <label class="form-label">Фото воспоминания</label>
+
+                        <input type="file"
+                               class="form-control"
+                               accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn btn-success mt-3">
+                        Сохранить воспоминание
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
