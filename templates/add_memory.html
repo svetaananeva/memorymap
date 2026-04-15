@@ -33,10 +33,13 @@
                             <div class="position-absolute top-50 start-50 translate-middle text-center">
                                 <div style="font-size: 52px;">📍</div>
                                 <div class="fw-semibold">Точка будет выбрана на карте</div>
-                                <div class="text-muted small">
-                                    Здесь будет подключена интерактивная карта
-для выбора точки и автоматического заполнения координат.
+                                <div>
+                                    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+                                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+                                    <div id="map" style="height: 400px;"></div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
