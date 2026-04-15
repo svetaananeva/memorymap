@@ -5,7 +5,7 @@ from .models import Memory
 class MemoryForm(forms.ModelForm):
     class Meta:
         model = Memory
-        fields = ['title', 'description', 'latitude', 'longitude']
+        fields = ['title', 'description', 'latitude', 'longitude', 'image']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
