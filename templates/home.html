@@ -13,4 +13,12 @@
         </a>
     </div>
 </div>
+{% for memory in memories %}
+    <h3>{{ memory.title }}</h3>
+    <p>{{ memory.description }}</p>
+
+    {% if memory.image %}
+        <img src="{{ memory.image.url }}" width="300">
+    {% endif %}
+{% endfor %}
 {% endblock %}
