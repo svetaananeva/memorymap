@@ -30,3 +30,18 @@ def add_memory_view(request):
         form = MemoryForm()
 
     return render(request, 'add_memory.html', {'form': form})
+    
+from django.shortcuts import render, redirect
+from .forms import MemoryForm
+
+
+def add_memory(request):
+    if request.method == 'POST':
+        form = MemoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = MemoryForm()
+
+    return render(request, 'add_memory.html', {'form': form})
