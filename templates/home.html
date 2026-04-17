@@ -1,24 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="p-5 mb-4 bg-white rounded-4 shadow-sm">
-    <div class="container-fluid py-4">
-        <h1 class="display-5 fw-bold">Добро пожаловать в MemoryMap</h1>
-        <p class="col-md-8 fs-5">
-            MemoryMap — это сервис для сохранения воспоминаний о посещённых местах.
-            Вы можете добавлять места, сохранять координаты и оставлять свои комментарии.
-        </p>
-        <a href="{% url 'add_memory' %}" class="btn btn-primary btn-lg">
-            Добавить воспоминание
-        </a>
+<h1 class="mb-4">Воспоминания</h1>
+
+<div class="container">
+    <div class="row">
+        {% for m in memories %}
+            <div class="col-md-6 col-lg-4 mb-4 text-center">
+                <div class="card h-100 shadow-sm rounded-4">
+
+                    {% if m.image %}
+                        <img src="{{ m.image.url }}"
+                             class="card-img-top"
+                             style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center bg-light"
+                             style="height: 200px;">
+                            <span class="text-muted">Нет фото</span>
+                        </div>
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ m.title }}</h5>
+
+                        <p class="card-text">
+                            {{ m.description|default:"Без описания" }}
+                        </p>
+
+                        <p class="text-muted small mb-1">
+                            📍 {{ m.latitude }}, {{ m.longitude }}
+                        </p>
+
+                        <p class="text-muted small">
+                            🕒 {{ m.created_at|date:"d.m.Y H:i" }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        {% empty %}
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
+                <div class="card h-100 shadow-sm rounded-4">
+            <p>Пока нет воспоминаний</p>
+                </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
-{% for memory in memories %}
-    <h3>{{ memory.title }}</h3>
-    <p>{{ memory.description }}</p>
-
-    {% if memory.image %}
-        <img src="{{ memory.image.url }}" width="300">
-    {% endif %}
-{% endfor %}
 {% endblock %}

@@ -5,3 +5,4 @@ django-allauth
 requests
 pyjwt
 cryptography
+pillow

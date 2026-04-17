@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="row justify-content-center">
     <div class="col-md-9 col-lg-8">
         <div class="card shadow-sm border-0 rounded-4">
@@ -20,28 +21,10 @@
                         {{ form.description }}
                     </div>
 
-                    <!-- Блок карты -->
-                    <div class="mb-4">
+                                        <div class="mb-4">
                         <label class="form-label">Точка на карте</label>
 
-                        <div class="border rounded-4 position-relative overflow-hidden bg-light"
-                             style="height: 320px; background-image:
-                             linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
-                             linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
-                             background-size: 40px 40px;">
-
-                            <div class="position-absolute top-50 start-50 translate-middle text-center">
-                                <div style="font-size: 52px;">📍</div>
-                                <div class="fw-semibold">Точка будет выбрана на карте</div>
-                                <div>
-                                    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-                                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-                                    <div id="map" style="height: 400px;"></div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <div id="map" style="height: 400px; border-radius: 12px;"></div>
                     </div>
 
                     <!-- Координаты -->
@@ -62,18 +45,11 @@
                     </div>
 
                     <!-- Фото -->
-                    <div class="mb-4">
-                        <label class="form-label">Фото воспоминания</label>
 
-                        <input type="file"
-                               class="form-control"
-                               accept="image/*">
-                    </div>
-                    <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Сохранить</button>
-</form>
+                        <div class="mb-3">
+                            <label class="form-label">Фото</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                        </div>
 
                     <button type="submit" class="btn btn-success mt-3">
                         Сохранить воспоминание
@@ -83,4 +59,33 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var map = L.map('map').setView([55.751244, 37.618423], 10);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var marker;
+
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker([lat, lng]).addTo(map);
+
+            // ВАЖНО: у тебя поля называются latitude / longitude
+            document.getElementById('id_latitude').value = lat;
+            document.getElementById('id_longitude').value = lng;
+        });
+    });
+</script>
+
 {% endblock %}
+

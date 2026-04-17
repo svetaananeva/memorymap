@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Memory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, verbose_name="Название места")
     description = models.TextField(blank=True, verbose_name="Описание")
     latitude = models.FloatField(verbose_name="Широта")

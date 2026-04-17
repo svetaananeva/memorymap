@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 from django.conf.global_settings import LOGOUT_REDIRECT_URL
 
@@ -28,6 +29,16 @@ SECRET_KEY = 'django-insecure-9r#8=!hej*84t%@249(y^$9(ah6)m6ekd5suf%+_5i-1d8g$h(
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '715390491517-jjuttdro2mb1bc6sd1cgaednb91ofikf.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
 
 
 # Application definition
@@ -139,3 +150,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = '/login/'
