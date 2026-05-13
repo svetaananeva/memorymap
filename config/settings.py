@@ -32,6 +32,14 @@ ALLOWED_HOSTS = []
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'SCOPE': [
+                    'profile',
+                    'email',
+                ],
+
+                'AUTH_PARAMS': {
+                    'access_type': 'online',
+                },
         'APP': {
             'client_id': '715390491517-jjuttdro2mb1bc6sd1cgaednb91ofikf.apps.googleusercontent.com',
             'secret': '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',
